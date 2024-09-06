@@ -81,54 +81,45 @@ const playMusic = (track, pause = false) => {
     document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 }
 
+
 async function displayAlbums() {
     try {
-        let response = await fetch(`https://ayushtan123.github.io/Tunify/songs/`);
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        let text = await response.text();
-        
-        let div = document.createElement("div");
-        div.innerHTML = text;
-        let anchors = div.getElementsByTagName("a")
+        // Fetch the JSON data
+        let response = await fetch('https://ayushtan123.github.io/Tunify/albums.json');
+        if (!response.ok) throw new Error('Network response was not ok');
 
-        let cardContainer = document.querySelector(".cardContainer")
+        // Parse the JSON data
+        let data = await response.json();
 
-        let array = Array.from(anchors);
-        for (let index = 2; index < array.length; index++) {
-            const e = array[index];
-            if (e.href.includes("/songs") && !e.href.includes(".htaccess") && e.href!="/") {
-                let folder = e.href.split("/").slice(-1)[0]
-                let folderResponse = await fetch(`https://ayushtan123.github.io/Tunify/songs/${folder}/info.json`);
-                if (!folderResponse.ok) {
-                    throw new Error('Network response was not ok ' + folderResponse.statusText);
-                }
-                let folderData = await folderResponse.json();
-                cardContainer.innerHTML += `<div data-folder="${folder}" class="card">
+        // Process the JSON data
+        let cardContainer = document.querySelector(".cardContainer");
+        data.albums.forEach(album => {
+            cardContainer.innerHTML += `<div data-folder="${album.folder}" class="card">
                 <div class="play">
                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M9.5 16V8L16 12L9.5 16Z" stroke="#141B34" stroke-width="3"
-                            stroke-linejoin="miter" fill="#141B34" />
+                        <path d="M9.5 16V8L16 12L9.5 16Z" stroke="#141B34" stroke-width="3" stroke-linejoin="miter" fill="#141B34" />
                     </svg>
                 </div>
-                <img src="/songs/${folder}/cover.jpeg" alt="not found" />
-                <h2 style="font-weight: bold; font-size: 25px;">${folderData.title}</h2>
-                <p style="color: #a7a7a7; font-size: 13px;">${folderData.description}</p>
-                </div>`
-            }
-        }
-        Array.from(document.getElementsByClassName("card")).forEach(e => {
-            e.addEventListener("click", async item => {
-                songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
-                console.log(songs);
-                playMusic(songs[0])
-            })
-        })
+                <img src="/songs/${album.folder}/cover.jpeg" alt="not found" />
+                <h2 style="font-weight: bold; font-size: 25px;">${album.title}</h2>
+                <p style="color: #a7a7a7; font-size: 13px;">${album.description}</p>
+            </div>`;
+        });
+
+        // Add event listeners for the cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', async (e) => {
+                let folder = e.currentTarget.dataset.folder;
+                songs = await getSongs(`songs/${folder}`);
+                playMusic(songs[0]);
+            });
+        });
+
     } catch (error) {
         console.error('Failed to fetch albums:', error);
     }
 }
+
 
 async function main() {
     await getSongs("songs/romantic")
