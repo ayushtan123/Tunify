@@ -1,0 +1,58 @@
+{
+    "albums": [
+      {
+        "folder": "arijit",
+        "title":"Arijit Singh Hits",
+        "description":"Bollywood crooner's essential songs."
+      },
+      
+      {
+        "folder": "devotional",
+        "title":"Devotional",
+        "description":"Embark on a soulful journey with transcendent melodies that uplift the spirit and soothe the soul."
+      },
+
+      {
+        "folder": "hiphop",
+        "title":"Hip Hop",
+        "description":"Groove to the beats that seamlessly blend the rhythms of the streets with the vibrant spirit of Bollywood."
+      },
+
+      {
+        "folder": "hollywood",
+        "title":"Hollywood Hits",
+        "description":"Immerse yourself in the glamour of Hollywood with this collection of chart-topping hits"
+      },
+
+      {
+        "folder": "motivational",
+        "title":"Motivational",
+        "description":"Elevate your spirit and seize the day. The fuel for your journey towards success and inspiration."
+      },
+
+      {
+        "folder": "old",
+        "title":"Old is Gold",
+        "description":"Indulge in the timeless charm of classic Indian tunes—where every note is a golden memory."
+      },
+
+      {
+        "folder": "punjabi",
+        "title":"Punjabi X",
+        "description":"Dive into the energetic beats and vibrant rhythms where every track is a dance floor anthem."
+      },
+
+      {
+        "folder": "romantic",
+        "title":"Romantic Melodies",
+        "description":"Drown in love's melody where every note whispers sweet serenades."
+      },
+
+      {
+        "folder": "travel",
+        "title":"Travel",
+        "description":"Fuel your wanderlust where every beat takes you on a journey to the heart of adventure and discovery."
+      }
+    ]
+  }
+  
