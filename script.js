@@ -82,57 +82,54 @@ const playMusic = (track, pause = false) => {
 }
 
 async function displayAlbums() {
-    let a = await fetch(`songs/`);
-    let response = await a.text();
-
-    let div = document.createElement("div");
-    div.innerHTML = response;
-    let anchors = div.getElementsByTagName("a")
-
-    let cardContainer = document.querySelector(".cardContainer")
-
-    let array = Array.from(anchors);
-    for (let index = 2; index < array.length; index++) {
-        const e = array[index];
-        // if(e.href!="http://127.0.0.1:5500/")console.log(e.href)
-
-        if (e.href.includes("/songs") && !e.href.includes(".htaccess") && e.href!="/") {
-            let folder = e.href.split("/").slice(-1)[0]
-
-            // console.log(e.href.split("/").slice(-2)[0])
-
-            //get the metadata of the folder
-            let a = await fetch(`/songs/${folder}/info.json`);
-            let response = await a.json();
-            // console.log(response)
-
-            cardContainer.innerHTML = cardContainer.innerHTML + `<div data-folder="${folder}" class="card">
-            <div class="play">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.5 16V8L16 12L9.5 16Z" stroke="#141B34" stroke-width="3"
-                        stroke-linejoin="miter" fill="#141B34" />
-                </svg>
-            </div>
-            <img src="/songs/${folder}/cover.jpeg" alt="not found" />
-
-            <h2 style="font-weight: bold; font-size: 25px;">${response.title}</h2>
-            <p style="color: #a7a7a7; font-size: 13px;">${response.description}</p>
-            </div>`
-
+    try {
+        let response = await fetch(`https://ayushtan123.github.io/Tunify/songs/`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
         }
+        let text = await response.text();
+        
+        let div = document.createElement("div");
+        div.innerHTML = text;
+        let anchors = div.getElementsByTagName("a")
 
-    }
-    //load the playlist whenever the card is clicked
-    Array.from(document.getElementsByClassName("card")).forEach(e => {
-        e.addEventListener("click", async item => {
-            songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
-            console.log(songs);
-            playMusic(songs[0])
+        let cardContainer = document.querySelector(".cardContainer")
 
+        let array = Array.from(anchors);
+        for (let index = 2; index < array.length; index++) {
+            const e = array[index];
+            if (e.href.includes("/songs") && !e.href.includes(".htaccess") && e.href!="/") {
+                let folder = e.href.split("/").slice(-1)[0]
+                let folderResponse = await fetch(`https://ayushtan123.github.io/Tunify/songs/${folder}/info.json`);
+                if (!folderResponse.ok) {
+                    throw new Error('Network response was not ok ' + folderResponse.statusText);
+                }
+                let folderData = await folderResponse.json();
+                cardContainer.innerHTML += `<div data-folder="${folder}" class="card">
+                <div class="play">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9.5 16V8L16 12L9.5 16Z" stroke="#141B34" stroke-width="3"
+                            stroke-linejoin="miter" fill="#141B34" />
+                    </svg>
+                </div>
+                <img src="/songs/${folder}/cover.jpeg" alt="not found" />
+                <h2 style="font-weight: bold; font-size: 25px;">${folderData.title}</h2>
+                <p style="color: #a7a7a7; font-size: 13px;">${folderData.description}</p>
+                </div>`
+            }
+        }
+        Array.from(document.getElementsByClassName("card")).forEach(e => {
+            e.addEventListener("click", async item => {
+                songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
+                console.log(songs);
+                playMusic(songs[0])
+            })
         })
-    })
-
+    } catch (error) {
+        console.error('Failed to fetch albums:', error);
+    }
 }
+
 async function main() {
     await getSongs("songs/romantic")
     // songs = await getSongs("songs/a")
