@@ -1,15 +1,17 @@
-# Tunify 📻
-Welcome to the **Spotify 2.0!**  
+# Tunify 📻     
+Welcome to the **Spotify 2.0!**   
 
-This project aims to replicate the core functionalities of the popular music🎵 streaming service, Spotify. By using this player, you can explore, listen to, and manage your favorite music, just like you would on the original platform.
+This project aims to replicate the core functionalities of the popular music🎵 streaming service, Spotify. By using this player, you can explore, listen and manage your favorite music, just like you would on the original platform.  
 
-For the listeners, by a listener.🎙️🎧
+For the listeners, by a listener.🎙️🎧 
 
-Check out from here➡️  https://ayushtan123.github.io/Tunify
+### Check out from here➡️  
+- **Vercel:** https://tunify-play.vercel.app/
+- **Github Pages:** https://ayushtan123.github.io/Tunify
 
 ## Note (06-09-24)
 * Before Sept 2024, the website was hosted on another platform. The domain expired for unknown reason. 
-* Hence, I made changes in code and successfully published on Github Pages. 
+* Hence, I made changes in code and successfully published on **Vercel** and Github Pages. 
 * Had to collect and organise all files info in JSON format for webpages to easily access. No major changes done in frontend (it was good already :>)
 * I have learned a lot in one year about hosting and development and I am glad that I was able to publish this.
 
