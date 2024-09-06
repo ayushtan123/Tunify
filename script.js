@@ -27,8 +27,8 @@ async function getSongs(folder) {
     currFolder = folder;
     
     // Fetch the info.json file
-    let response = await fetch(`https://github.com/ayushtan123/Tunify/blob/master/${folder}/music.json`);
-    // https://github.com/ayushtan123/Tunify/blob/master/
+    let response = await fetch(`https://ayushtan123.github.io/Tunify/${folder}/music.json`);
+    // https://ayushtan123.github.io/Tunify/
     let data = await response.json();
 
     // Check if the files property exists
@@ -125,7 +125,7 @@ async function displayAlbums() {
     //load the playlist whenever the card is clicked
     Array.from(document.getElementsByClassName("card")).forEach(e => {
         e.addEventListener("click", async item => {
-            songs = await getSongs(`https://github.com/ayushtan123/Tunify/blob/master/songs/${item.currentTarget.dataset.folder}`)
+            songs = await getSongs(`https://ayushtan123.github.io/Tunify/songs/${item.currentTarget.dataset.folder}`)
             console.log(songs);
             playMusic(songs[0])
 
