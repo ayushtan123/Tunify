@@ -69,7 +69,7 @@ async function getSongs(folder) {
 
 const playMusic = (track, pause = false) => {
     // let audio=new Audio("/songs/"+track);
-    currentSong.src = `/${currFolder}/` + track;
+    currentSong.src = `https://ayushtan123.github.io/Tunify/${currFolder}/` + track;
 
     if (!pause) {
         currentSong.play();
