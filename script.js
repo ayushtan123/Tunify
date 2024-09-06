@@ -100,7 +100,7 @@ async function displayAlbums() {
                         <path d="M9.5 16V8L16 12L9.5 16Z" stroke="#141B34" stroke-width="3" stroke-linejoin="miter" fill="#141B34" />
                     </svg>
                 </div>
-                <img src="/songs/${album.folder}/cover.jpeg" alt="not found" />
+                <img src="https://ayushtan123.github.io/Tunify/songs/${album.folder}/cover.jpeg" alt="not found" />
                 <h2 style="font-weight: bold; font-size: 25px;">${album.title}</h2>
                 <p style="color: #a7a7a7; font-size: 13px;">${album.description}</p>
             </div>`;
